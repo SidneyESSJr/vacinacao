@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.vacinacao.backend.entities.Person;
+import br.com.vacinacao.backend.domains.Person;
 import br.com.vacinacao.backend.repositories.PersonRepository;
 import br.com.vacinacao.backend.services.exceptions.DataIntegrityViolationException;
 import br.com.vacinacao.backend.services.exceptions.ObjectNotFoudException;
@@ -35,7 +35,7 @@ public class PersonService {
     public Person update(Person person) {
         Person updatedPerson = findById(person.getId());
         updateData(person, updatedPerson);
-        return updatedPerson;
+        return repository.save(updatedPerson);
     }
 
     public void delete(Integer id) {

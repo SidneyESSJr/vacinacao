@@ -1,4 +1,4 @@
-package br.com.vacinacao.backend.entities;
+package br.com.vacinacao.backend.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -23,10 +24,10 @@ public class Person {
     @Size(max = 60, min = 2, message = "{name.size}")
     private String name;
 
-    @NotBlank(message = "{age.notBlank}")
+    @NotNull(message = "{age.notNull}")
     private Integer age;
 
-    @NotBlank(message = "riskGroup.notBlank")
+    @NotNull(message = "{riskGroup.notNull}")
     private Boolean riskGroup;
 
     public Person() {
