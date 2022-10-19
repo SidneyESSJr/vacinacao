@@ -3,6 +3,7 @@ package br.com.vacinacao.backend.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class PersonService {
 
     public Person update(Person person) {
         Person updatedPerson = findById(person.getId());
-        updateData(person, updatedPerson);
+        BeanUtils.copyProperties(person, updatedPerson);
         return repository.save(updatedPerson);
     }
 
@@ -46,13 +47,6 @@ public class PersonService {
             throw new DataIntegrityViolationException(
                     "This person cannot be deleted because they are linked to other entities");
         }
-    }
-
-    private void updateData(Person person, Person updatedPerson) {
-        updatedPerson.setSocialId(person.getSocialId());
-        updatedPerson.setName(person.getName());
-        updatedPerson.setAge(person.getAge());
-        updatedPerson.setRiskGroup(person.getRiskGroup());
     }
 
 }
